@@ -43,6 +43,5 @@ public class ShipController : MonoBehaviour
     {
         rb.AddForce(forwardAmount * transform.forward * speed);
         rb.MoveRotation(GetComponent<Rigidbody>().rotation * Quaternion.Euler(0, turnAmount * turnSpeed, 0));
-
     }
 }
