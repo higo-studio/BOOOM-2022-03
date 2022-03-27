@@ -18,6 +18,7 @@ public class ShipController : MonoBehaviour
     public float pseRate = 1;
     public ParticleSystem particle;
     public Image AccCD;
+    public float MaxSpeed = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,11 +44,21 @@ public class ShipController : MonoBehaviour
         var emission = particle.emission;
         emission.rateOverTime = 1 + rb.velocity.magnitude * pseRate;
         Accelerate();
+
     }
 
     private void FixedUpdate()
     {
-        rb.AddForce(forwardAmount * transform.forward * speed);
+        if (!isAcc)
+        {
+            if (rb.velocity.magnitude <= MaxSpeed)
+                rb.AddForce(forwardAmount * transform.forward * speed);
+        }
+        else
+        {
+            rb.AddForce(forwardAmount * transform.forward * speed);
+        }
+ 
         rb.MoveRotation(GetComponent<Rigidbody>().rotation * Quaternion.Euler(0, turnAmount * turnSpeed, 0));
 
     }
@@ -58,10 +69,11 @@ public class ShipController : MonoBehaviour
         if (Input.GetButtonDown("Accelerate")&&!isAcc)
         {
             speed = AccSpeed;
+            rb.velocity = transform.forward * speed;
             isAcc = true;
             AccCD.fillAmount = 1;
-            DOTween.To(() => speed, x => speed = x, OriginSpeed, 2f);
-            DOTween.To(() => AccCD.fillAmount, y => AccCD.fillAmount = y, 0, 2.5f).SetEase(Ease.Linear).OnComplete(() => {
+            DOTween.To(() => speed, x => speed = x, OriginSpeed, 3f);
+            DOTween.To(() => AccCD.fillAmount, y => AccCD.fillAmount = y, 0, 3.5f).SetEase(Ease.Linear).OnComplete(() => {
                 isAcc = false;
             });
 
