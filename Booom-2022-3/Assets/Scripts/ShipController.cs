@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class ShipController : MonoBehaviour
 {
@@ -8,14 +10,19 @@ public class ShipController : MonoBehaviour
     float forwardAmount;
     float turnAmount;
     public float speed = 10;
+    public float AccSpeed = 10;
+    float OriginSpeed;
+    bool isAcc = false;
     public float turnSpeed = 10;
     Rigidbody rb;
     public float pseRate = 1;
     public ParticleSystem particle;
+    public Image AccCD;
     // Start is called before the first frame update
     void Start()
     {
         rb = transform.GetComponent<Rigidbody>();
+        OriginSpeed = speed;
     }
 
     // Update is called once per frame
@@ -33,15 +40,31 @@ public class ShipController : MonoBehaviour
         turnAmount = Mathf.Atan2(localMove.x, localMove.z);
         //transform.GetChild(0).GetChild(0).localRotation = Quaternion.Euler(0, 0, -turnAmount * 10);
 
-        //�޸��˻����ӷ�������
         var emission = particle.emission;
         emission.rateOverTime = 1 + rb.velocity.magnitude * pseRate;
-
+        Accelerate();
     }
 
     private void FixedUpdate()
     {
         rb.AddForce(forwardAmount * transform.forward * speed);
         rb.MoveRotation(GetComponent<Rigidbody>().rotation * Quaternion.Euler(0, turnAmount * turnSpeed, 0));
+
+    }
+
+
+    void Accelerate()
+    {
+        if (Input.GetButtonDown("Accelerate")&&!isAcc)
+        {
+            speed = AccSpeed;
+            isAcc = true;
+            AccCD.fillAmount = 1;
+            DOTween.To(() => speed, x => speed = x, OriginSpeed, 2f);
+            DOTween.To(() => AccCD.fillAmount, y => AccCD.fillAmount = y, 0, 2.5f).SetEase(Ease.Linear).OnComplete(() => {
+                isAcc = false;
+            });
+
+        }
     }
 }
