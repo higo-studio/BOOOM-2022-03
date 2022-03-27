@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using XInputDotNetPure; // Required in C#
 
 public class ShipController : MonoBehaviour
 {
@@ -19,6 +20,13 @@ public class ShipController : MonoBehaviour
     public ParticleSystem particle;
     public Image AccCD;
     public float MaxSpeed = 5;
+
+    bool playerIndexSet = false;
+    PlayerIndex playerIndex;
+    GamePadState state;
+    GamePadState prevState;
+    float shakeForce = 0.5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,10 +37,31 @@ public class ShipController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        if (!playerIndexSet || !prevState.IsConnected)
+        {
+            for (int i = 0; i < 4; ++i)
+            {
+                PlayerIndex testPlayerIndex = (PlayerIndex)i;
+                GamePadState testState = GamePad.GetState(testPlayerIndex);
+                if (testState.IsConnected)
+                {
+                    Debug.Log(string.Format("GamePad found {0}", testPlayerIndex));
+                    playerIndex = testPlayerIndex;
+                    playerIndexSet = true;
+                }
+            }
+        }
+
+        prevState = state;
+        state = GamePad.GetState(playerIndex);
+        //GamePad.SetVibration(playerIndex, state.Triggers.Left, state.Triggers.Right);
+
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
+        
 
- 
+
         move = new Vector3(x, 0, z);
         Vector3 localMove = transform.InverseTransformVector(move);
         if (localMove.magnitude > 1f) localMove = localMove.normalized;
@@ -66,17 +95,37 @@ public class ShipController : MonoBehaviour
 
     void Accelerate()
     {
+        float timeCount = 1f;
         if (Input.GetButtonDown("Accelerate")&&!isAcc)
         {
             speed = AccSpeed;
             rb.velocity = transform.forward * speed;
             isAcc = true;
             AccCD.fillAmount = 1;
+
+            GamePad.SetVibration(playerIndex, shakeForce, shakeForce);
+            DOTween.To(() => timeCount, a => timeCount = a, 0.1f, 0.2f).OnComplete(() =>
+            {
+                timeCount = 1f;
+                GamePad.SetVibration(playerIndex, 0, 0);
+            });
+
             DOTween.To(() => speed, x => speed = x, OriginSpeed, 3f);
             DOTween.To(() => AccCD.fillAmount, y => AccCD.fillAmount = y, 0, 3.5f).SetEase(Ease.Linear).OnComplete(() => {
                 isAcc = false;
             });
 
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        float timeCount = 1f;
+        GamePad.SetVibration(playerIndex, shakeForce, shakeForce);
+        DOTween.To(() => timeCount, a => timeCount = a, 0.1f, 0.2f).OnComplete(() =>
+        {
+            timeCount = 1f;
+            GamePad.SetVibration(playerIndex, 0, 0);
+        });
     }
 }
