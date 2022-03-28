@@ -10,16 +10,18 @@ public class ShipController : MonoBehaviour
     Vector3 move;
     float forwardAmount;
     float turnAmount;
-    public float speed = 10;
-    public float AccSpeed = 10;
+    float speed;
+    float AccSpeed;
     float OriginSpeed;
     bool isAcc = false;
-    public float turnSpeed = 10;
+    float turnSpeed;
     Rigidbody rb;
-    public float pseRate = 1;
+    float pseRate;
+    [HideInInspector]
     public ParticleSystem particle;
+    [HideInInspector]
     public Image AccCD;
-    public float MaxSpeed = 5;
+    float MaxSpeed;
 
     bool playerIndexSet = false;
     PlayerIndex playerIndex;
@@ -31,6 +33,11 @@ public class ShipController : MonoBehaviour
     void Start()
     {
         rb = transform.GetComponent<Rigidbody>();
+        speed = GameManager.Instance.ShipMoveForce;
+        AccSpeed = GameManager.Instance.AccForce;
+        turnSpeed = GameManager.Instance.ShipTurnSpeed;
+        MaxSpeed = GameManager.Instance.MaxSpeed;
+        pseRate = GameManager.Instance.RipplePSE;
         OriginSpeed = speed;
     }
 
