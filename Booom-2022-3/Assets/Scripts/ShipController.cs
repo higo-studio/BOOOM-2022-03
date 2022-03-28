@@ -25,7 +25,7 @@ public class ShipController : MonoBehaviour
     PlayerIndex playerIndex;
     GamePadState state;
     GamePadState prevState;
-    float shakeForce = 0.5f;
+    float shakeForce = 0.3f;
 
     // Start is called before the first frame update
     void Start()
