@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using XInputDotNetPure; // Required in C#
+//using XInputDotNetPure; // Required in C#
 
 public class ShipController : MonoBehaviour
 {
@@ -24,9 +24,12 @@ public class ShipController : MonoBehaviour
     float MaxSpeed;
 
     bool playerIndexSet = false;
+    /*
     PlayerIndex playerIndex;
     GamePadState state;
     GamePadState prevState;
+    ?
+    */
     float shakeForce = 0.3f;
 
     // Start is called before the first frame update
@@ -44,7 +47,7 @@ public class ShipController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        /*
         if (!playerIndexSet || !prevState.IsConnected)
         {
             for (int i = 0; i < 4; ++i)
@@ -63,7 +66,7 @@ public class ShipController : MonoBehaviour
         prevState = state;
         state = GamePad.GetState(playerIndex);
         //GamePad.SetVibration(playerIndex, state.Triggers.Left, state.Triggers.Right);
-
+        */
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         
@@ -109,14 +112,14 @@ public class ShipController : MonoBehaviour
             rb.velocity = transform.forward * speed;
             isAcc = true;
             AccCD.fillAmount = 1;
-
+            /*
             GamePad.SetVibration(playerIndex, shakeForce, shakeForce);
             DOTween.To(() => timeCount, a => timeCount = a, 0.1f, 0.2f).OnComplete(() =>
             {
                 timeCount = 1f;
                 GamePad.SetVibration(playerIndex, 0, 0);
             });
-
+            */
             DOTween.To(() => speed, x => speed = x, OriginSpeed, 3f);
             DOTween.To(() => AccCD.fillAmount, y => AccCD.fillAmount = y, 0, 3.5f).SetEase(Ease.Linear).OnComplete(() => {
                 isAcc = false;
@@ -126,7 +129,9 @@ public class ShipController : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
-    {
+    {    
+        //手柄震动
+        /*
         float timeCount = 1f;
         GamePad.SetVibration(playerIndex, shakeForce, shakeForce);
         DOTween.To(() => timeCount, a => timeCount = a, 0.1f, 0.2f).OnComplete(() =>
@@ -134,5 +139,8 @@ public class ShipController : MonoBehaviour
             timeCount = 1f;
             GamePad.SetVibration(playerIndex, 0, 0);
         });
+        */
+        //播放音效
+
     }
 }
