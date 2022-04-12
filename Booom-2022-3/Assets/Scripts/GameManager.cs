@@ -7,15 +7,15 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [Tooltip("船的马力")]
-    [Range(1, 10)]
+    [Range(0, 10)]
     public float ShipMoveForce;
 
     [Tooltip("船的转向速度")]
-    [Range(1, 10)]
+    [Range(0, 10)]
     public float ShipTurnSpeed;
 
     [Tooltip("加速力量")]
-    [Range(5, 15)]
+    [Range(0, 15)]
     public float AccForce;
 
     [Tooltip("船的最大速度")]
