@@ -104,13 +104,13 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Drop: 0
+    - _Drop: 4.42
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Length: 0.684
+    - _Length: 0.803
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
