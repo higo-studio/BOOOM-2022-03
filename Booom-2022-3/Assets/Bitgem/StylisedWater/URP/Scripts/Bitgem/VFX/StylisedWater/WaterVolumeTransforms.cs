@@ -73,11 +73,13 @@ namespace Bitgem.VFX.StylisedWater
                     {
                         for (var iz = z; iz < z + Mathf.RoundToInt(sca.z); iz++)
                         {
+                            
                             // validate
                             if (ix < 0 || ix >= MAX_TILES_X || iy < 0 | iy >= MAX_TILES_Y || iz < 0 || iz >= MAX_TILES_Z)
                             {
                                 continue;
                             }
+                            
 
                             // add the tile
                             _tiles[ix, iy, iz] = true;
