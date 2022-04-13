@@ -20,6 +20,7 @@ public class ShipController : MonoBehaviour
     public ParticleSystem particle;
     public Image AccCD;
     public float MaxSpeed;
+    public Transform mapPlayerSign;
 
     bool playerIndexSet = false;
     /*
@@ -76,6 +77,10 @@ public class ShipController : MonoBehaviour
         var emission = particle.emission;
         emission.rateOverTime = 1 + rb.velocity.magnitude * pseRate;
         Accelerate();
+
+        //改变地图标志的方向
+        mapPlayerSign.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, -transform.eulerAngles.y);
+
 
     }
 
