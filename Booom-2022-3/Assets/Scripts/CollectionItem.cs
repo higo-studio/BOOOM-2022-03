@@ -14,9 +14,9 @@ public class CollectionItem : MonoBehaviour
 
     public ItemType Type;
 
-    static float GreenRupeeScore = 1;
-    static float BlueRupeeScore = 5;
-    static float RedRupeeScore = 20;
+    static int GreenRupeeScore = 5;
+    static int BlueRupeeScore = 20;
+    static int RedRupeeScore = 100;
 
 
     void Start()
@@ -28,14 +28,19 @@ public class CollectionItem : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            transform.GetComponent<AudioSource>().Play();
+
             //计入分数
             switch (Type)
             {
                 case ItemType.GreenRupee:
+                    Score.instance.AddScore(GreenRupeeScore);
                     break;
                 case ItemType.BlueRupee:
+                    Score.instance.AddScore(BlueRupeeScore);
                     break;
                 case ItemType.RedRupee:
+                    Score.instance.AddScore(RedRupeeScore);
                     break;
                 default:
                     break;
