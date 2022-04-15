@@ -7,7 +7,7 @@ public class WhaleDemo : MonoBehaviour
 {
     void Start()
     {
-        transform.DOLocalMove(transform.localPosition + Vector3.forward * -100, 20f);
+        transform.DOLocalMove(transform.localPosition + Vector3.forward * -200, 40f);
     }
 
     private void OnTriggerEnter(Collider other)
