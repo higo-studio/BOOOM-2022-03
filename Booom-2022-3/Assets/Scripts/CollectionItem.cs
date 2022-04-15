@@ -30,7 +30,7 @@ public class CollectionItem : MonoBehaviour
         {
             transform.GetComponent<AudioSource>().Play();
 
-            //¼ÆÈë·ÖÊý
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             switch (Type)
             {
                 case ItemType.GreenRupee:
@@ -46,12 +46,12 @@ public class CollectionItem : MonoBehaviour
                     break;
             }
 
-            DOTween.Kill(gameObject);
+            DOTween.Kill(transform);
 
             transform.DOLocalJump(transform.position + Vector3.up * 2, 1, 0, 1);
             transform.DORotate(new Vector3(0, 1000, 0), 1f, RotateMode.FastBeyond360).SetEase(Ease.Linear).OnComplete(() =>
             {
-                DOTween.Kill(gameObject);
+                DOTween.Kill(transform);
                 Destroy(gameObject);
             });
 
