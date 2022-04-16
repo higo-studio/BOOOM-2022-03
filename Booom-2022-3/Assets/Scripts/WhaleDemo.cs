@@ -17,6 +17,7 @@ public class WhaleDemo : MonoBehaviour
         for (int i = 0; i < pathPoint.Length; i++)
         {
             pathPos[i] = pathPoint[i].position;
+            Destroy(pathPoint[i].gameObject);
         }
 
         pathPos[pathPoint.Length] = transform.position;
