@@ -13,10 +13,11 @@ public class Flock : MonoBehaviour
     bool turning = false;//Åöµ½×ªÏò
 
     GlobalFlock globalFlock;
-
+    Animator anim;
     void Start()
     {
         globalFlock = GetComponentInParent<GlobalFlock>();
+        anim = GetComponentInParent<Animator>();
         speed = Random.Range(0.5f, 1f);
     }
 
@@ -49,6 +50,8 @@ public class Flock : MonoBehaviour
         }
 
         transform.Translate(0, 0, Time.deltaTime * speed);
+        anim.speed = Mathf.Sqrt(speed) / 2;
+
     }
 
     void ApplyRules()
