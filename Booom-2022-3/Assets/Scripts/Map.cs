@@ -64,11 +64,11 @@ public class Map : MonoBehaviour
             {
                 case targetType.Q:
                     targetSign[i].GetComponent<Image>().sprite = questionPic;
-                    targetSign[i].GetComponent<Image>().color = new Color(1, 0.9f, 0.45f);
+                    targetSign[i].GetComponent<Image>().color = new Color(0, 0.6f, 0);
                     break;
                 case targetType.E:
                     targetSign[i].GetComponent<Image>().sprite = exclamatoryPic;
-                    targetSign[i].GetComponent<Image>().color = new Color(0, 0.6f, 0);
+                    targetSign[i].GetComponent<Image>().color = new Color(1, 0.9f, 0.45f);
                     break;
                 case targetType.X:
                     targetSign[i].GetComponent<Image>().sprite = crossPic;
