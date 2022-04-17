@@ -6,9 +6,12 @@ public class WindZone : MonoBehaviour
 {
     public float WindZoneDegree = 90;
     public float WindZoneForce = 1;
+    public float RandomWindCD = 60;
+    public bool isRandomWindOn;
 
     float OriDegree;
     float OriForce;
+    float OriCD;
     bool OriRandomOn;
 
     /// <summary>
@@ -17,15 +20,17 @@ public class WindZone : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player") 
+        if (other.tag == "Player")
         {
             OriDegree = WindSys.instance.degree;
             OriForce = WindSys.instance.WindForce;
+            OriCD = WindSys.instance.RandomWindCD;
             OriRandomOn = WindSys.instance.RandomWindOn;
 
             WindSys.instance.degree = WindZoneDegree;
             WindSys.instance.WindForce = WindZoneForce;
-            WindSys.instance.RandomWindOn = false;
+            WindSys.instance.RandomWindCD = RandomWindCD;
+            WindSys.instance.RandomWindOn = isRandomWindOn;
 
             WindSys.instance.EffectUpdate();
         }
@@ -41,6 +46,7 @@ public class WindZone : MonoBehaviour
         {
             WindSys.instance.degree = OriDegree;
             WindSys.instance.WindForce = OriForce;
+            WindSys.instance.RandomWindCD = RandomWindCD;
             WindSys.instance.RandomWindOn = OriRandomOn;
 
             WindSys.instance.EffectUpdate();
