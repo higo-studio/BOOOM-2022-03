@@ -23,7 +23,7 @@ public class ShipController : MonoBehaviour
     public float MaxSpeed;
     public Transform mapPlayerSign;
 
-    bool playerIndexSet = false;
+    //bool playerIndexSet = false;
 
     public bool isAnchor;//Å×Ãª
     /*
@@ -32,7 +32,7 @@ public class ShipController : MonoBehaviour
     GamePadState prevState;
     ?
     */
-    float shakeForce = 0.3f;
+    //float shakeForce = 0.3f;
 
     // Start is called before the first frame update
     void Start()
@@ -123,7 +123,7 @@ public class ShipController : MonoBehaviour
 
     void Accelerate()
     {
-        float timeCount = 1f;
+        //float timeCount = 1f;
         if (Input.GetButtonDown("Accelerate") && !isAcc)
         {
             speed = AccSpeed;
