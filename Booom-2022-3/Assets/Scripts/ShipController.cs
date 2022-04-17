@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 //using XInputDotNetPure; // Required in C#
 
 public class ShipController : MonoBehaviour
@@ -23,6 +24,8 @@ public class ShipController : MonoBehaviour
     public Transform mapPlayerSign;
 
     bool playerIndexSet = false;
+
+    public bool isAnchor;//抛锚
     /*
     PlayerIndex playerIndex;
     GamePadState state;
@@ -61,12 +64,17 @@ public class ShipController : MonoBehaviour
         state = GamePad.GetState(playerIndex);
         //GamePad.SetVibration(playerIndex, state.Triggers.Left, state.Triggers.Right);
         */
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-        
 
+        Anchor();
+        if (!isAnchor)
+        {
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+            move = new Vector3(x, 0, z);
 
-        move = new Vector3(x, 0, z);
+            Accelerate();
+        }
+
         Vector3 localMove = transform.InverseTransformVector(move);
         if (localMove.magnitude > 1f) localMove = localMove.normalized;
 
@@ -76,11 +84,23 @@ public class ShipController : MonoBehaviour
 
         var emission = particle.emission;
         emission.rateOverTime = 1 + rb.velocity.magnitude * pseRate;
-        Accelerate();
 
         //改变地图标志的方向
         mapPlayerSign.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, -transform.eulerAngles.y);
 
+
+    }
+
+    private void Anchor()
+    {
+        if (Input.GetButtonDown("Anchor"))
+        {
+            isAnchor = !isAnchor;
+        }
+        if (isAnchor)
+        {
+            move = Vector3.zero;
+        }
 
     }
 
@@ -95,7 +115,7 @@ public class ShipController : MonoBehaviour
         {
             rb.AddForce(forwardAmount * transform.forward * speed);
         }
- 
+
         rb.MoveRotation(GetComponent<Rigidbody>().rotation * Quaternion.Euler(0, turnAmount * turnSpeed, 0));
 
     }
@@ -104,7 +124,7 @@ public class ShipController : MonoBehaviour
     void Accelerate()
     {
         float timeCount = 1f;
-        if (Input.GetButtonDown("Accelerate")&&!isAcc)
+        if (Input.GetButtonDown("Accelerate") && !isAcc)
         {
             speed = AccSpeed;
             rb.velocity = transform.forward * speed;
@@ -119,7 +139,8 @@ public class ShipController : MonoBehaviour
             });
             */
             DOTween.To(() => speed, x => speed = x, OriginSpeed, 3f);
-            DOTween.To(() => AccCD.fillAmount, y => AccCD.fillAmount = y, 0, 3.5f).SetEase(Ease.Linear).OnComplete(() => {
+            DOTween.To(() => AccCD.fillAmount, y => AccCD.fillAmount = y, 0, 3.5f).SetEase(Ease.Linear).OnComplete(() =>
+            {
                 isAcc = false;
             });
 
@@ -127,7 +148,7 @@ public class ShipController : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
-    {    
+    {
         //手柄震动
         /*
         float timeCount = 1f;
