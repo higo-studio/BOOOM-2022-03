@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
 
     public void BackToMenu()
     {
-        SceneManager.LoadScene("TetrisStart");
+        SceneManager.LoadScene("TitleMenu");
     }
 
 
