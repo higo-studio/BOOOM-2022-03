@@ -26,7 +26,10 @@ public class GlobalFlock : MonoBehaviour
                 Random.Range(-tankSize.y, tankSize.y),
                 Random.Range(-tankSize.z, tankSize.z));
             allFish[i] = (GameObject)Instantiate(fishPrefab, transform.position + pos, Quaternion.identity, this.transform);
-            allFish[i].AddComponent<Flock>();
+            if (allFish[i].GetComponent<Flock>() == null)
+            {
+                allFish[i].AddComponent<Flock>();
+            }
         }
     }
 
