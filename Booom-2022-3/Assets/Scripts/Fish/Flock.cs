@@ -71,7 +71,7 @@ public class Flock : MonoBehaviour
         }
 
         transform.Translate(0, 0, Time.deltaTime * speed);
-        anim.speed = Mathf.Sqrt(speed) / 2;
+        anim.speed = Mathf.Sqrt(speed) / Mathf.Sqrt(2);
 
     }
 
@@ -113,7 +113,7 @@ public class Flock : MonoBehaviour
         {
             vcentre = vcentre / groupSize + (goalPos - this.transform.position);
             speed = Mathf.Lerp(speed, gSpeed / groupSize, Time.deltaTime * gSpeed);
-            anim.speed = Mathf.Sqrt(speed) / 2;
+            anim.speed = Mathf.Sqrt(speed) / Mathf.Sqrt(2);
 
             Vector3 direction = (vcentre + vavoid) - transform.position;
             if (direction != Vector3.zero)

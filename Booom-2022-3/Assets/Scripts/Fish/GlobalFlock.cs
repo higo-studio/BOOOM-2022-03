@@ -41,7 +41,7 @@ public class GlobalFlock : MonoBehaviour
         }
         else
         {
-            if (Random.Range(0, 10000) < 10)
+            if (Random.Range(0, 10000) < 20)
             {
                 goalPos = transform.position + new Vector3(Random.Range(-tankSize.x, tankSize.x),
                 Random.Range(-tankSize.y, tankSize.y),
