@@ -71,16 +71,16 @@ Material:
     - Vector1_34CF798A: 1.75
     - Vector1_36E8227: 0.6
     - Vector1_3D886DA1: 0
-    - Vector1_46E42935: 1
+    - Vector1_46E42935: 0
     - Vector1_47683D42: 0
     - Vector1_A0EAD698: 0.1
-    - Vector1_A6A0BC26: -5.65
+    - Vector1_A6A0BC26: -10
     - Vector1_B9F56378: 0
     - Vector1_C360A163: 7.5
     - Vector1_DF445019: 1.5
     - Vector1_E03AB928: 0.05
     - Vector1_E5C51606: 0.5
-    - Vector1_F38B44AA: 0
+    - Vector1_F38B44AA: -1000
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -94,7 +94,7 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _QueueControl: 1
-    - _QueueOffset: 0
+    - _QueueOffset: 38
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
