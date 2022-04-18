@@ -2,7 +2,7 @@
  * @Author: chunibyou
  * @Date: 2022-04-07 11:01:40
  * @LastEditors: chunibyou
- * @LastEditTime: 2022-04-18 16:18:46
+ * @LastEditTime: 2022-04-18 18:39:40
  * @Description: 挂载在终点
  */
 
@@ -22,6 +22,8 @@ public class TaskTarget : MonoBehaviour
     [SerializeField]
     private bool isShipStay = false;
 
+    private bool done = false;
+
     public List<string> taskNames;
 
     private TaskManagerMono taskManagerMono;
@@ -30,17 +32,21 @@ public class TaskTarget : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player" && IsTargetNecessary())
         {
             isShipStay = true;
+            TaskUIManager.Instance.RegisterCurrTarget(this);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
+            stayTime = 0;
             isShipStay = false;
+            done = false;
+            TaskUIManager.Instance.CancelCurrTarget(this);
         }
     }
 
@@ -49,20 +55,42 @@ public class TaskTarget : MonoBehaviour
         taskManagerMono = mono;
     }
 
+    public float GetCurrStayTime()
+    {
+        return stayTime;
+    }
+
+    public bool IsTargetDone()
+    {
+        return done;
+    }
+
+    // 判断是否有任务点对应的任务正在执行
+    private bool IsTargetNecessary()
+    {
+        bool necessary = false;
+        foreach (var name in taskNames)
+        {
+            necessary = necessary || taskManagerMono.manager.IsTaskWorking(name);
+        }
+        return necessary;
+    }
+
     private void FixedUpdate()
     {
-        if(!isShipStay)
+        if (!isShipStay)
         {
             return;
         }
         stayTime += Time.fixedDeltaTime;
-        if (stayTime >= holdingTime)
+        if (stayTime >= holdingTime && !done)
         {
             foreach (var name in taskNames)
             {
                 taskManagerMono.AddTaskSource(name);
             }
             stayTime = 0;
+            done = true;
         }
     }
 
