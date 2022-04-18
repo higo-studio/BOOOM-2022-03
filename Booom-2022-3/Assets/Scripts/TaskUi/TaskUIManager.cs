@@ -2,7 +2,7 @@
  * @Author: chunibyou
  * @Date: 2022-04-18 17:13:07
  * @LastEditors: chunibyou
- * @LastEditTime: 2022-04-18 18:11:56
+ * @LastEditTime: 2022-04-18 20:45:58
  * @Description: 单例，用于把任务信息给到UI
  */
 
@@ -38,6 +38,13 @@ class TaskUIManager
     public TaskTarget GetCurrTarget()
     {
         return currTarget;
+    }
+
+    public float score { get; private set; }
+
+    public void UpdateScore(float _score)
+    {
+        score = _score;
     }
 
 }

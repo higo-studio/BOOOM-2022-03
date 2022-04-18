@@ -8,6 +8,8 @@ public class TaskInformation
 {
     public string name;
     public float limitTime;
+    public float reward;
+    public float penal;
     public GameObject releaser;
     public GameObject target;
 }
