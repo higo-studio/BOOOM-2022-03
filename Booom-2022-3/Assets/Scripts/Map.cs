@@ -45,7 +45,7 @@ public class Map : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerMapPos = new Vector2(Player.transform.position.x - SW.transform.position.x, Player.transform.position.z - SW.transform.position.z) / mapRange - Vector2.one * 0.5f;
+        playerMapPos = new Vector2(Player.transform.position.x - SW.transform.position.x, Player.transform.position.z - SW.transform.position.z) / mapRange;
         playerSign.GetComponent<RectTransform>().localPosition = playerMapPos * new Vector2(mapUIW, mapUIH);
     }
 

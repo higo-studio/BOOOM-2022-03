@@ -29,7 +29,9 @@ public class WindSys : MonoBehaviour
 
     public Vector2 RandomWindForce;
 
-    public Vector2 RandomWindDegree;
+    //public Vector2 RandomWindDegree;
+
+    public float RandomWindDegreeDelta = 45;
 
     
 
@@ -47,6 +49,12 @@ public class WindSys : MonoBehaviour
         vel = WavePS.velocityOverLifetime;
         EffectUpdate();
             StartCoroutine(RandomWind());
+        if (RandomWindOn)
+        {
+            WindForce = Random.Range(RandomWindForce.x, RandomWindForce.y);
+            degree = Random.Range(0, 360);
+            EffectUpdate();
+        }
     }
 
     // Update is called once per frame
@@ -74,7 +82,8 @@ public class WindSys : MonoBehaviour
             if (RandomWindOn)
             {
                 WindForce = Random.Range(RandomWindForce.x, RandomWindForce.y);
-                degree = Random.Range(RandomWindDegree.x, RandomWindDegree.y);
+                //degree = Random.Range(RandomWindDegree.x, RandomWindDegree.y);
+                degree += Random.Range(-RandomWindDegreeDelta, RandomWindDegreeDelta);
                 EffectUpdate();
             }
         }
