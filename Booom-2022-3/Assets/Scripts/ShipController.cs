@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Cinemachine; 
 using System;
 //using XInputDotNetPure; // Required in C#
 
@@ -30,7 +31,6 @@ public class ShipController : MonoBehaviour
     PlayerIndex playerIndex;
     GamePadState state;
     GamePadState prevState;
-    ?
     */
     //float shakeForce = 0.3f;
 
@@ -159,7 +159,14 @@ public class ShipController : MonoBehaviour
             GamePad.SetVibration(playerIndex, 0, 0);
         });
         */
+        //镜头抖动
+        var impulseSource = transform.GetComponent<CinemachineImpulseSource>();
+        impulseSource.GenerateImpulseWithVelocity(Vector3.one * 0.05f);
         //播放音效
+        var audioSource = transform.Find("SFX").GetComponent<AudioSource>();
+        audioSource.pitch = UnityEngine.Random.Range(0.5f, 1f);
+        audioSource.Play();
+
 
     }
 }

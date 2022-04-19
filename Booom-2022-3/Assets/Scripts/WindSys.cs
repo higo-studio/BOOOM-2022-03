@@ -54,6 +54,7 @@ public class WindSys : MonoBehaviour
             WindForce = Random.Range(RandomWindForce.x, RandomWindForce.y);
             degree = Random.Range(0, 360);
             EffectUpdate();
+            Debug.Log("当前风力:" + WindForce + ";风向" + degree + "°");
         }
     }
 
@@ -85,6 +86,7 @@ public class WindSys : MonoBehaviour
                 //degree = Random.Range(RandomWindDegree.x, RandomWindDegree.y);
                 degree += Random.Range(-RandomWindDegreeDelta, RandomWindDegreeDelta);
                 EffectUpdate();
+                Debug.Log("当前风力:" + WindForce + ";风向" + degree + "°");
             }
         }
     }

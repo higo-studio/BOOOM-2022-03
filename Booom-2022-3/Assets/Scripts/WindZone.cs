@@ -33,6 +33,7 @@ public class WindZone : MonoBehaviour
             WindSys.instance.RandomWindOn = isRandomWindOn;
 
             WindSys.instance.EffectUpdate();
+            Debug.Log("当前风力:" + WindZoneForce + ";风向" + WindZoneDegree + "°");
         }
     }
 
@@ -50,6 +51,7 @@ public class WindZone : MonoBehaviour
             WindSys.instance.RandomWindOn = OriRandomOn;
 
             WindSys.instance.EffectUpdate();
+            Debug.Log("当前风力:" + OriForce + ";风向" + OriDegree + "°");
         }
     }
 }
