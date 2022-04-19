@@ -1,0 +1,46 @@
+﻿{
+  "items": [
+    {
+      "speaker": "wing",
+      "content": "你好呀，兄弟！",
+      "menuText": "",
+      "linkTo": []
+    },
+    {
+      "speaker": "wing",
+      "content": "你是谁？",
+      "menuText": "",
+      "linkTo": []
+    },
+    {
+      "speaker": "旅行者",
+      "content": "我..忘记了自己来自哪里了",
+      "menuText": "",
+      "linkTo": [ 3, 4, 5 ]
+    },
+    {
+      "speaker": "wing",
+      "content": "你在干嘛",
+      "menuText": "",
+      "linkTo": [ 9 ]
+    },
+    {
+      "speaker": "wing",
+      "content": "这里有什么好玩的？",
+      "menuText": "",
+      "linkTo": [ 9 ]
+    },
+    {
+      "speaker": "wing",
+      "content": "这是哪里？",
+      "menuText": "",
+      "linkTo": [ 9 ]
+    },
+    {
+      "speaker": "旅行者",
+      "content": "不好意思，我有点不舒服，告辞！",
+      "menuText": "",
+      "linkTo": [ -1 ]
+    }
+  ]
+}

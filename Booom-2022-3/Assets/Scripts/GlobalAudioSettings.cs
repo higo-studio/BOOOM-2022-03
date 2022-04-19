@@ -24,6 +24,19 @@ public struct ChangedApplyListener<T> where T : IComparable<T>
         }
         return false;
     }
+
+    public static implicit operator T(ChangedApplyListener<T> src)
+    {
+        src.Update(out _);
+        return src.Value;
+    }
+
+    public static implicit operator ChangedApplyListener<T>(T src)
+    {
+        ChangedApplyListener<T> news = default;
+        news.Value = src;
+        return news;
+    }
 }
 
 [AttributeUsage(AttributeTargets.Field, Inherited = true, AllowMultiple = false)]
