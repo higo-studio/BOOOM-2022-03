@@ -2,7 +2,7 @@
  * @Author: chunibyou
  * @Date: 2022-03-31 22:14:11
  * @LastEditors: chunibyou
- * @LastEditTime: 2022-04-18 20:37:13
+ * @LastEditTime: 2022-04-20 23:09:35
  * @Description: 任务系统组件
  */
 using UnityEngine;
@@ -42,10 +42,10 @@ namespace TaskSystem
         public float penal { get; private set; } 
 
         [SerializeField]
-        private float limitTime;
+        public float limitTime { get; private set; }
 
         [SerializeField]
-        private float time;
+        public float time { get; private set; }
 
         // 持有目标资源
         [SerializeField]
