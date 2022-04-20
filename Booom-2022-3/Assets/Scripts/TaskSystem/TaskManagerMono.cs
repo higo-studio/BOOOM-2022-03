@@ -2,7 +2,7 @@
  * @Author: chunibyou
  * @Date: 2022-04-07 18:42:43
  * @LastEditors: chunibyou
- * @LastEditTime: 2022-04-07 20:17:26
+ * @LastEditTime: 2022-04-18 16:13:06
  * @Description: 保存Manger的mono，便于数据获取和流程控制
  */
 
@@ -67,5 +67,10 @@ public class TaskManagerMono : MonoBehaviour
     public bool ReleaseTask(string taskName)
     {
         return manager.AcceptTask(taskName);
+    }
+
+    public TaskManager GetTaskManager()
+    {
+        return manager;
     }
 }

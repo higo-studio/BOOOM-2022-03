@@ -2,7 +2,7 @@
  * @Author: chunibyou
  * @Date: 2022-03-31 22:13:33
  * @LastEditors: chunibyou
- * @LastEditTime: 2022-04-07 20:23:08
+ * @LastEditTime: 2022-04-18 20:37:34
  * @Description: 任务系统
  */
 
@@ -27,7 +27,7 @@ namespace TaskSystem
         // 根据TaskInformation的配置信息创建Task
         public void CreateTaskByInformation(TaskInformation information)
         {
-            Task task = Task.CreateTask(information.name, information.limitTime);
+            Task task = Task.CreateTask(information.name, information.limitTime, information.reward, information.penal);
             taskMap.Add(information.name, task);
         }
 

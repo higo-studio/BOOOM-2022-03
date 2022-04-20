@@ -2,7 +2,7 @@
  * @Author: chunibyou
  * @Date: 2022-03-31 22:14:11
  * @LastEditors: chunibyou
- * @LastEditTime: 2022-04-07 20:14:16
+ * @LastEditTime: 2022-04-18 20:37:13
  * @Description: 任务系统组件
  */
 using UnityEngine;
@@ -37,6 +37,10 @@ namespace TaskSystem
 
         public string name;
 
+        public float reward { get; private set; } 
+
+        public float penal { get; private set; } 
+
         [SerializeField]
         private float limitTime;
 
@@ -58,6 +62,20 @@ namespace TaskSystem
             limitTime = _limitTime;
             source = 0;
             targetSource = 1;
+            reward = 0;
+            penal = 0;
+        } 
+
+        private Task(string _name, float _limitTime, float _reward, float _penal)
+        {
+            type = TaskType.PLACED;
+            name = _name;
+            time = 0;
+            limitTime = _limitTime;
+            source = 0;
+            targetSource = 1;
+            reward = _reward;
+            penal = _penal;
         } 
 
         private Task(string _name, float _targetSource, float _limitTime)
@@ -68,11 +86,31 @@ namespace TaskSystem
             limitTime = _limitTime;
             source = 0;
             targetSource = _targetSource;
+            reward = 0;
+            penal = 0;
+        }
+
+        private Task(string _name, float _targetSource, float _limitTime, float _reward, float _penal)
+        {
+            type = TaskType.PLACED;
+            name = _name;
+            time = 0;
+            limitTime = _limitTime;
+            source = 0;
+            targetSource = _targetSource;
+            reward = _reward;
+            penal = _penal;
         } 
 
         public static Task CreateTask(string name, float _limitTime)
         {
             Task task = new Task(name, _limitTime);
+            return task;
+        }
+
+        public static Task CreateTask(string name, float _limitTime, float _reward, float _penal)
+        {
+            Task task = new Task(name, _limitTime, _reward, _penal);
             return task;
         }
 
