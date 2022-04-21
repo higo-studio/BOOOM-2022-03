@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2423932218000124845}
   - component: {fileID: 2423932218000124846}
   - component: {fileID: 2423932218000124843}
+  - component: {fileID: 5614419783696980043}
   m_Layer: 0
   m_Name: TaskFinishPoint
   m_TagString: Untagged
@@ -99,6 +100,21 @@ CapsuleCollider:
   m_Height: 0.1
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0.03}
+--- !u!114 &5614419783696980043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2423932218000124832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfc6fc6815910fc4d9ff1e88d4bfe03d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdingTime: 2
+  isShipStay: 0
+  taskNames: []
 --- !u!1 &5987386836314852867
 GameObject:
   m_ObjectHideFlags: 0
