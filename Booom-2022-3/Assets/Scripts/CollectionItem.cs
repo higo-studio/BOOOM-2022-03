@@ -34,13 +34,13 @@ public class CollectionItem : MonoBehaviour
             switch (Type)
             {
                 case ItemType.GreenRupee:
-                    Score.instance.AddScore(GreenRupeeScore);
+                    other.GetComponent<TaskExecutor>().OnLoot(GreenRupeeScore);
                     break;
                 case ItemType.BlueRupee:
-                    Score.instance.AddScore(BlueRupeeScore);
+                    other.GetComponent<TaskExecutor>().OnLoot(BlueRupeeScore);
                     break;
                 case ItemType.RedRupee:
-                    Score.instance.AddScore(RedRupeeScore);
+                    other.GetComponent<TaskExecutor>().OnLoot(RedRupeeScore);
                     break;
                 default:
                     break;

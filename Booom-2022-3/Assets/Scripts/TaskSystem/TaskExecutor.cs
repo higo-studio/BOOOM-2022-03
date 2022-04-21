@@ -2,7 +2,7 @@
  * @Author: chunibyou
  * @Date: 2022-04-07 20:10:29
  * @LastEditors: chunibyou
- * @LastEditTime: 2022-04-18 20:52:26
+ * @LastEditTime: 2022-04-21 16:48:16
  * @Description: 用于实现任务的执行者功能(暂时单一功能)
  */
 
@@ -27,6 +27,13 @@ public class TaskExecutor : MonoBehaviour, ITaskFinishHandle
         if(score < 0)
             score = 0;
         Debug.Log($"任务 : “{task.name}” 失败，惩罚分数 {task.penal}");
+        TaskUIManager.Instance.UpdateScore(score);
+    }
+
+    // 吃金币？
+    public void OnLoot(float reward)
+    {
+        score += reward;
         TaskUIManager.Instance.UpdateScore(score);
     }
 }
