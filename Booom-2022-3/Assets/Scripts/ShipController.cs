@@ -26,7 +26,7 @@ public class ShipController : MonoBehaviour
 
     //bool playerIndexSet = false;
 
-    public bool isAnchor;//Å×Ãª
+    public bool isAnchor;//æŠ›é”š
     /*
     PlayerIndex playerIndex;
     GamePadState state;
@@ -85,7 +85,7 @@ public class ShipController : MonoBehaviour
         var emission = particle.emission;
         emission.rateOverTime = 1 + rb.velocity.magnitude * pseRate;
 
-        //¸Ä±äµØÍ¼±êÖ¾µÄ·½Ïò
+        //æ”¹å˜åœ°å›¾æ ‡å¿—çš„æ–¹å‘
         mapPlayerSign.GetComponent<RectTransform>().rotation = Quaternion.Euler(0, 0, -transform.eulerAngles.y);
 
 
@@ -149,24 +149,25 @@ public class ShipController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //ÊÖ±úÕğ¶¯
-        /*
-        float timeCount = 1f;
-        GamePad.SetVibration(playerIndex, shakeForce, shakeForce);
-        DOTween.To(() => timeCount, a => timeCount = a, 0.1f, 0.2f).OnComplete(() =>
+        if (collision.collider.tag == "Env")
         {
-            timeCount = 1f;
-            GamePad.SetVibration(playerIndex, 0, 0);
-        });
-        */
-        //¾µÍ·¶¶¶¯
-        var impulseSource = transform.GetComponent<CinemachineImpulseSource>();
-        impulseSource.GenerateImpulseWithVelocity(Vector3.one * 0.05f);
-        //²¥·ÅÒôĞ§
-        var audioSource = transform.Find("SFX").GetComponent<AudioSource>();
-        audioSource.pitch = UnityEngine.Random.Range(0.5f, 1f);
-        audioSource.Play();
-
-
+            //æ‰‹æŸ„éœ‡åŠ¨
+            /*
+            float timeCount = 1f;
+            GamePad.SetVibration(playerIndex, shakeForce, shakeForce);
+            DOTween.To(() => timeCount, a => timeCount = a, 0.1f, 0.2f).OnComplete(() =>
+            {
+                timeCount = 1f;
+                GamePad.SetVibration(playerIndex, 0, 0);
+            });
+            */
+            //é•œå¤´æŠ–åŠ¨
+            var impulseSource = transform.GetComponent<CinemachineImpulseSource>();
+            impulseSource.GenerateImpulseWithVelocity(Vector3.one * 0.05f);
+            //æ’­æ”¾éŸ³æ•ˆ
+            var audioSource = transform.Find("SFX").GetComponent<AudioSource>();
+            audioSource.pitch = UnityEngine.Random.Range(0.5f, 1f);
+            audioSource.Play();
+        }
     }
 }
