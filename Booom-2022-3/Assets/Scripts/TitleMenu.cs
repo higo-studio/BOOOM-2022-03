@@ -7,7 +7,7 @@ public class TitleMenu : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneFader.instance.FadeTo("TestScene");
     }
 
     public void QuitGame()

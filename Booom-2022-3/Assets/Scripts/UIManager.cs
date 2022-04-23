@@ -8,14 +8,9 @@ public class UIManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
 
-    void Update()
-    {
-    }
-
-
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneFader.instance.FadeTo("TestScene");
     }
 
     public void QuitGame()
@@ -29,7 +24,7 @@ public class UIManager : MonoBehaviour
 
     public void BackToMenu()
     {
-        SceneManager.LoadScene("TitleMenu");
+        SceneFader.instance.FadeTo("TitleMenu");
     }
 
 
