@@ -27,5 +27,17 @@ public class UIManager : MonoBehaviour
         SceneFader.instance.FadeTo("TitleMenu");
     }
 
+    public void PauseGame()
+    {
+        transform.Find("Setting").Find("SettingP").gameObject.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        transform.Find("Setting").Find("SettingP").gameObject.SetActive(false);
+    }
+
 
 }
