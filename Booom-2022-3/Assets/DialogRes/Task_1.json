@@ -1,0 +1,69 @@
+﻿{
+  "items": [
+    {
+      "index": 0,
+      "speaker": "旅行者",
+      "content": "嗨伙计，你是第一天上班吗，船似乎开得不太利索",
+      "menuText": "",
+      "linkTo": []
+    },
+    {
+      "index": 1,
+      "speaker": "旅行者",
+      "content": "无所谓了，你捎我一程到隔壁的小岛上去",
+      "menuText": "",
+      "linkTo": []
+    },
+    {
+      "index": 2,
+      "speaker": "旅行者",
+      "content": "最近都没有船经过，害我等了好几天，我的生意都快黄了",
+      "menuText": "",
+      "linkTo": [ 3, 4, 5 ]
+    },
+    {
+      "index": 3,
+      "speaker": "我",
+      "content": "你要去的岛在哪里",
+      "menuText": "",
+      "linkTo": [ 6 ]
+    },
+    {
+      "index": 4,
+      "speaker": "我",
+      "content": "报酬呢",
+      "menuText": "",
+      "linkTo": [ 7 ]
+    },
+    {
+      "index": 5,
+      "speaker": "我",
+      "content": "好吧",
+      "menuText": "",
+      "linkTo": [ 8 ]
+    },
+    {
+      "index": 6,
+      "speaker": "旅行者",
+      "content": "东北方向",
+      "menuText": "",
+      "linkTo": [ 2 ]
+    }
+    ,
+    {
+      "index": 7,
+      "speaker": "旅行者",
+      "content": "路费肯定不会亏待你，赶紧出发吧",
+      "menuText": "",
+      "linkTo": [ 2 ]
+    }
+    ,
+    {
+      "index": 8,
+      "speaker": "旅行者",
+      "content": "走走走，时间不等人",
+      "menuText": "",
+      "linkTo": [ -1 ]
+    }
+  ]
+}
