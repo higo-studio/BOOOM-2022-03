@@ -49,27 +49,29 @@ public class Dialogue : MonoBehaviour
     {
         items = JsonUtility.FromJson<JsonArrayWrap<DialogueItem>>(Json.text).items;
         //Refresh(0);
+        DisabledUI();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(speakerHandle != null && !speakerHandle.InArea())
+        {
+            speakerHandle.OnTalkEnd(false);
+            DisabledUI();
+        }
     }
 
     public void Refresh(int index)
     {
-        if(speakerHandle != null && !speakerHandle.InArea())
-        {
-            speakerHandle.OnTalkEnd(false);
-            return;
-        }
         OptionGroup.gameObject.SetActive(false);
         if (index < 0)
         {
             Writer.Pause();
             OnComplete?.Invoke();
             if(speakerHandle != null)
-                speakerHandle.OnTalkEnd(true);                                    
+                speakerHandle.OnTalkEnd(true);       
+            DisabledUI();                             
             return;
         }
         cursor = Mathf.Clamp(index, 0, items.Length - 1);
@@ -124,7 +126,24 @@ public class Dialogue : MonoBehaviour
 
     public void Speak(ITalkable speakH, int index)
     {
+        EnableUI();
         speakerHandle = speakH;
         Refresh(index);
+    }
+
+    public void EnableUI()
+    {
+        CanvasGroup cg = GetComponent<CanvasGroup>();
+        cg.alpha = 1;
+        cg.blocksRaycasts = true;
+        cg.interactable = true;
+    }
+
+    public void DisabledUI()
+    {
+        CanvasGroup cg = GetComponent<CanvasGroup>();
+        cg.alpha = 0;
+        cg.blocksRaycasts = false;
+        cg.interactable = false;
     }
 }
