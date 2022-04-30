@@ -2,7 +2,7 @@
  * @Author: chunibyou
  * @Date: 2022-04-18 17:34:02
  * @LastEditors: chunibyou
- * @LastEditTime: 2022-04-18 18:29:43
+ * @LastEditTime: 2022-04-30 16:46:56
  * @Description: 显示处理倒计时UI
  */
 
@@ -17,7 +17,7 @@ public class TaskCDBlock : MonoBehaviour
 
     public TextMeshProUGUI text;
 
-    private TaskTarget target;
+    private ITaskUITimer target;
 
     private void EnableUI()
     {
@@ -47,12 +47,12 @@ public class TaskCDBlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        target = TaskUIManager.Instance.GetCurrTarget();
-        if (target != null && !target.IsTargetDone())
+        target = TaskUIManager.Instance.GetTaskTimer();
+        if (target != null && !target.IsDone())
         {
             EnableUI();
-            float holdingTime = target.holdingTime;
-            float currTime = holdingTime - target.GetCurrStayTime();
+            float holdingTime = target.GetHoldingTime();
+            float currTime = holdingTime - target.GetCurrTime();
             float amount = currTime / holdingTime;
             if (currTime < 0.0f)
             {

@@ -2,7 +2,7 @@
  * @Author: chunibyou
  * @Date: 2022-04-18 17:13:07
  * @LastEditors: chunibyou
- * @LastEditTime: 2022-04-18 20:45:58
+ * @LastEditTime: 2022-04-30 16:42:34
  * @Description: 单例，用于把任务信息给到UI
  */
 
@@ -16,28 +16,29 @@ class TaskUIManager
 
     private TaskUIManager() { }
 
-    private TaskTarget currTarget;
+    private ITaskUITimer curr;
 
     // 获取到TaskTarget的引用
-    public void RegisterCurrTarget(TaskTarget target)
+    public void RegisterCurr(ITaskUITimer target)
     {
-        if(target == currTarget)
+        if(target == curr)
             return;
-        currTarget = target;
+        curr = target;
     }
 
     // 船只离开检查点时注销引用
-    public void CancelCurrTarget(TaskTarget target)
+    public void CancelCurr(ITaskUITimer target)
     {
-        if(target != currTarget)
+        if(target != curr)
             return;
-        currTarget = null;
+        curr = null;
     }
 
+
     // 获取当前检查点，可能为null
-    public TaskTarget GetCurrTarget()
+    public ITaskUITimer GetTaskTimer()
     {
-        return currTarget;
+        return curr;
     }
 
     public float score { get; private set; }
@@ -46,5 +47,7 @@ class TaskUIManager
     {
         score = _score;
     }
+
+    
 
 }

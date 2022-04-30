@@ -2,7 +2,7 @@
  * @Author: chunibyou
  * @Date: 2022-04-07 11:01:40
  * @LastEditors: chunibyou
- * @LastEditTime: 2022-04-18 18:39:40
+ * @LastEditTime: 2022-04-30 16:45:32
  * @Description: 挂载在终点
  */
 
@@ -13,7 +13,7 @@ using UnityEngine;
 using TaskSystem;
 
 [RequireComponent(typeof(Collider))]
-public class TaskTarget : MonoBehaviour
+public class TaskTarget : MonoBehaviour, ITaskUITimer
 {
 
     [Header("需在区域内停靠时间")]
@@ -35,7 +35,7 @@ public class TaskTarget : MonoBehaviour
         if (other.tag == "Player" && IsTargetNecessary())
         {
             isShipStay = true;
-            TaskUIManager.Instance.RegisterCurrTarget(this);
+            TaskUIManager.Instance.RegisterCurr(this);
         }
     }
 
@@ -46,7 +46,7 @@ public class TaskTarget : MonoBehaviour
             stayTime = 0;
             isShipStay = false;
             done = false;
-            TaskUIManager.Instance.CancelCurrTarget(this);
+            TaskUIManager.Instance.CancelCurr(this);
         }
     }
 
@@ -60,7 +60,7 @@ public class TaskTarget : MonoBehaviour
         return stayTime;
     }
 
-    public bool IsTargetDone()
+    public bool IsDone()
     {
         return done;
     }
@@ -93,5 +93,9 @@ public class TaskTarget : MonoBehaviour
             done = true;
         }
     }
+
+    public float GetCurrTime() { return stayTime; }
+
+    public float GetHoldingTime() { return holdingTime; }
 
 }
