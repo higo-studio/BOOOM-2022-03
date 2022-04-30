@@ -2,7 +2,7 @@
  * @Author: chunibyou
  * @Date: 2022-04-07 11:01:40
  * @LastEditors: chunibyou
- * @LastEditTime: 2022-04-30 16:45:32
+ * @LastEditTime: 2022-04-30 18:52:44
  * @Description: 挂载在终点
  */
 
@@ -13,11 +13,18 @@ using UnityEngine;
 using TaskSystem;
 
 [RequireComponent(typeof(Collider))]
-public class TaskTarget : MonoBehaviour, ITaskUITimer
+public class TaskTarget : MonoBehaviour, ITaskUITimer, ITalkable
 {
 
     [Header("需在区域内停靠时间")]
     public float holdingTime = 2.0f;
+
+    [Header("对话的JSON")]
+    public int wordsIndex = -1;
+
+    private bool talked = false;
+
+    bool talking = false;
 
     [SerializeField]
     private bool isShipStay = false;
@@ -29,6 +36,8 @@ public class TaskTarget : MonoBehaviour, ITaskUITimer
     private TaskManagerMono taskManagerMono;
 
     private float stayTime = 0;
+
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -91,11 +100,30 @@ public class TaskTarget : MonoBehaviour, ITaskUITimer
             }
             stayTime = 0;
             done = true;
+            OnTalkStart();
         }
     }
 
     public float GetCurrTime() { return stayTime; }
 
     public float GetHoldingTime() { return holdingTime; }
+
+    // 强制对话正常结束
+     public bool InArea()
+    {
+        return true;
+    }
+
+    public void OnTalkStart()
+    {
+        talking = true;
+        taskManagerMono.dialogue.Speak(this, wordsIndex);
+    }
+
+    public void OnTalkEnd(bool normalEnding)
+    {
+        talked = normalEnding;
+        talking = false;
+    }
 
 }

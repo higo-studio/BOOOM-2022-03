@@ -2,7 +2,7 @@
  * @Author: chunibyou
  * @Date: 2022-04-07 18:42:43
  * @LastEditors: chunibyou
- * @LastEditTime: 2022-04-18 16:13:06
+ * @LastEditTime: 2022-04-30 18:48:14
  * @Description: 保存Manger的mono，便于数据获取和流程控制
  */
 
@@ -20,6 +20,8 @@ public class TaskManagerMono : MonoBehaviour
     public TaskExecutor executor;
 
     public NormalTasks normalTasks;
+
+    public Dialogue dialogue;
 
     private void Awake()
     {

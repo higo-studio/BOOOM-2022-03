@@ -2,7 +2,7 @@
  * @Author: chunibyou
  * @Date: 2022-04-07 11:20:08
  * @LastEditors: chunibyou
- * @LastEditTime: 2022-04-30 16:49:31
+ * @LastEditTime: 2022-04-30 18:47:08
  * @Description: 挂载在NPC上
  */
 
@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class TaskReleaser : MonoBehaviour, ITaskUITimer
+public class TaskReleaser : MonoBehaviour, ITaskUITimer, ITalkable
 {
     public string taskName;
 
@@ -26,6 +26,11 @@ public class TaskReleaser : MonoBehaviour, ITaskUITimer
 
     private bool done = false;
 
+    [Header("对话的JSON")]
+    public int wordsIndex = -1;
+
+    private bool talked = false;
+
     private TaskManagerMono taskManagerMono;
 
     public void SetTaskManagerMono(TaskManagerMono mono)
@@ -33,6 +38,7 @@ public class TaskReleaser : MonoBehaviour, ITaskUITimer
         taskManagerMono = mono;
     }
 
+    bool talking = false;
     private void FixedUpdate()
     {
         if (!isShipStay)
@@ -43,7 +49,15 @@ public class TaskReleaser : MonoBehaviour, ITaskUITimer
             done = true;
             if (Input.GetButtonDown("Accept") && !taskManagerMono.GetTaskManager().IsTaskWorking(taskName))
             {
-                taskManagerMono.ReleaseTask(taskName);
+                if(talked)
+                {
+                    taskManagerMono.ReleaseTask(taskName);
+                }
+                else if(!talking)
+                {
+                    OnTalkStart();
+                }
+                
             }
         }
 
@@ -54,6 +68,7 @@ public class TaskReleaser : MonoBehaviour, ITaskUITimer
         if (other.tag == "Player")
         {
             isShipStay = true;
+            talked = false;
             TaskUIManager.Instance.RegisterCurr(this);
         }
     }
@@ -65,6 +80,7 @@ public class TaskReleaser : MonoBehaviour, ITaskUITimer
             isShipStay = false;
             time = 0;
             done = false;
+            talked = false;
             TaskUIManager.Instance.CancelCurr(this);
         }
     }
@@ -74,4 +90,21 @@ public class TaskReleaser : MonoBehaviour, ITaskUITimer
     public float GetHoldingTime() { return holdingTime; }
 
     public bool IsDone() { return done; }
+
+    public bool InArea()
+    {
+        return isShipStay;
+    }
+
+    public void OnTalkStart()
+    {
+        talking = true;
+        taskManagerMono.dialogue.Speak(this, wordsIndex);
+    }
+
+    public void OnTalkEnd(bool normalEnding)
+    {
+        talked = normalEnding;
+        talking = false;
+    }
 }

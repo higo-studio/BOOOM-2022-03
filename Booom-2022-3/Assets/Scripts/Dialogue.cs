@@ -31,6 +31,8 @@ public class Dialogue : MonoBehaviour
     private DialogueItem[] items;
     private int cursor = 0;
     // Start is called before the first frame update
+    private ITalkable speakerHandle;
+
     private void Awake()
     {
         SkipButton.onClick.AddListener(OnSkipButtonClicked);
@@ -46,7 +48,7 @@ public class Dialogue : MonoBehaviour
     void Start()
     {
         items = JsonUtility.FromJson<JsonArrayWrap<DialogueItem>>(Json.text).items;
-        Refresh(0);
+        //Refresh(0);
     }
 
     // Update is called once per frame
@@ -56,11 +58,18 @@ public class Dialogue : MonoBehaviour
 
     public void Refresh(int index)
     {
+        if(speakerHandle != null && !speakerHandle.InArea())
+        {
+            speakerHandle.OnTalkEnd(false);
+            return;
+        }
         OptionGroup.gameObject.SetActive(false);
         if (index < 0)
         {
             Writer.Pause();
             OnComplete?.Invoke();
+            if(speakerHandle != null)
+                speakerHandle.OnTalkEnd(true);                                    
             return;
         }
         cursor = Mathf.Clamp(index, 0, items.Length - 1);
@@ -111,5 +120,11 @@ public class Dialogue : MonoBehaviour
         var item = items[cursor];
         var nextIndex = item.linkTo[buttonIndex];
         Refresh(nextIndex);
+    }
+
+    public void Speak(ITalkable speakH, int index)
+    {
+        speakerHandle = speakH;
+        Refresh(index);
     }
 }
