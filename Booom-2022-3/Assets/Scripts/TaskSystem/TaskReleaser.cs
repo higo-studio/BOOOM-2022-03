@@ -2,7 +2,7 @@
  * @Author: chunibyou
  * @Date: 2022-04-07 11:20:08
  * @LastEditors: chunibyou
- * @LastEditTime: 2022-05-01 16:46:06
+ * @LastEditTime: 2022-05-01 17:34:21
  * @Description: 挂载在NPC上
  */
 
@@ -10,6 +10,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TaskSystem;
 
 [RequireComponent(typeof(Collider))]
 public class TaskReleaser : MonoBehaviour, ITaskUITimer, ITalkable
@@ -33,6 +34,10 @@ public class TaskReleaser : MonoBehaviour, ITaskUITimer, ITalkable
 
     private TaskManagerMono taskManagerMono;
 
+    private void Awake() {
+        perPosition = transform.position;
+    }
+
     public void SetTaskManagerMono(TaskManagerMono mono)
     {
         taskManagerMono = mono;
@@ -40,6 +45,8 @@ public class TaskReleaser : MonoBehaviour, ITaskUITimer, ITalkable
 
     bool talking = false;
     public bool Talking => talking;
+
+    private Vector3 perPosition;
     private void FixedUpdate()
     {
         if (!isShipStay)
@@ -70,27 +77,21 @@ public class TaskReleaser : MonoBehaviour, ITaskUITimer, ITalkable
             if (talked)
             {
                 taskManagerMono.ReleaseTask(taskName);
-                
             }
         }
-        //time += Time.fixedDeltaTime;
-        //if (time >= holdingTime)
-        //{
-        //done = true;
-        //if (Input.GetButtonDown("Accept") && !taskManagerMono.GetTaskManager().IsTaskWorking(taskName))
-        //{
-        //    if(talked)
-        //    {
-        //        taskManagerMono.ReleaseTask(taskName);
-        //    }
-        //    else if(!talking)
-        //    {
-        //        OnTalkStart();
-        //    }
-
-        //}
-        //}
-
+        
+        TaskState state = taskManagerMono.GetTaskManager().GetTaskState(taskName);
+        if(state == TaskState.ACCEPT || state == TaskState.COMPLETE)
+        {
+            //隐藏
+            perPosition = transform.position;
+            transform.position = new Vector3(perPosition.x, 500, perPosition.z);
+        }
+        else if(state == TaskState.FAIL || state == TaskState.WAITING)
+        {
+            //显示
+            transform.position = perPosition;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

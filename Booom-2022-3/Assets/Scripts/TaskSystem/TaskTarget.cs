@@ -2,7 +2,7 @@
  * @Author: chunibyou
  * @Date: 2022-04-07 11:01:40
  * @LastEditors: chunibyou
- * @LastEditTime: 2022-04-30 18:52:44
+ * @LastEditTime: 2022-05-01 18:17:12
  * @Description: 挂载在终点
  */
 
@@ -38,7 +38,11 @@ public class TaskTarget : MonoBehaviour, ITaskUITimer, ITalkable
 
     private float stayTime = 0;
 
-    
+
+    private void Awake()
+    {
+        perPosition = transform.position;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -86,6 +90,7 @@ public class TaskTarget : MonoBehaviour, ITaskUITimer, ITalkable
         return necessary;
     }
 
+    private Vector3 perPosition;
     private void FixedUpdate()
     {
         if (!isShipStay)
@@ -103,6 +108,31 @@ public class TaskTarget : MonoBehaviour, ITaskUITimer, ITalkable
             done = true;
             OnTalkStart();
         }
+
+        bool _active = false;
+        foreach (var taskName in taskNames)
+        {
+            TaskState state = taskManagerMono.GetTaskManager().GetTaskState(taskName);
+            if (state == TaskState.ACCEPT)
+            {
+                _active = true;
+            }
+            else
+            {
+                _active |= false;
+            }
+        }
+        if (_active)
+        {
+            //显示
+            transform.position = perPosition;
+        }
+        else
+        {
+            //隐藏
+            perPosition = transform.position;
+            transform.position = new Vector3(perPosition.x, 500, perPosition.z);
+        }
     }
 
     public float GetCurrTime() { return stayTime; }
@@ -110,7 +140,7 @@ public class TaskTarget : MonoBehaviour, ITaskUITimer, ITalkable
     public float GetHoldingTime() { return holdingTime; }
 
     // 强制对话正常结束
-     public bool InArea()
+    public bool InArea()
     {
         return true;
     }
