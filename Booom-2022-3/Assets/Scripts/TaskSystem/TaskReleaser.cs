@@ -2,7 +2,7 @@
  * @Author: chunibyou
  * @Date: 2022-04-07 11:20:08
  * @LastEditors: chunibyou
- * @LastEditTime: 2022-04-30 18:47:08
+ * @LastEditTime: 2022-05-01 16:32:38
  * @Description: 挂载在NPC上
  */
 
@@ -61,15 +61,15 @@ public class TaskReleaser : MonoBehaviour, ITaskUITimer, ITalkable
             }
             if (time >= holdingTime)
             {
-                if (talked)
-                {
-                    taskManagerMono.ReleaseTask(taskName);
-                }
-                else if (!talking)
+                if (!talking)
                 {
                     OnTalkStart();
-                    
+
                 }
+            }
+            if (talked)
+            {
+                taskManagerMono.ReleaseTask(taskName);
             }
         }
         //time += Time.fixedDeltaTime;
