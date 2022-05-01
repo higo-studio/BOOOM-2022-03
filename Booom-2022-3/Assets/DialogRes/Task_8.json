@@ -1,0 +1,18 @@
+﻿{
+  "items": [
+    {
+      "index": 0,
+      "speaker": "骷髅",
+      "content": "到~那里~到~那~里~",
+      "menuText": "",
+      "linkTo": []
+    },
+    {
+      "index": 1,
+      "speaker": "骷髅",
+      "content": "只要到那里~",
+      "menuText": "",
+      "linkTo": [-1]
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+﻿{
+  "items": [
+    {
+      "index": 0,
+      "speaker": "守塔人",
+      "content": "你好小船夫，你知道世界有多美吗？",
+      "menuText": "",
+      "linkTo": [1,2,3]
+    },
+    {
+      "index": 1,
+      "speaker": "我",
+      "content": "不知道",
+      "menuText": "",
+      "linkTo": [4]
+    },
+    {
+      "index": 2,
+      "speaker": "我",
+      "content": "很美",
+      "menuText": "",
+      "linkTo": [5]
+    },
+    {
+      "index": 3,
+      "speaker": "我",
+      "content": "非常美",
+      "menuText": "",
+      "linkTo": [6]
+    },
+    {
+      "index": 4,
+      "speaker": "守塔人",
+      "content": "真是可怜的人...",
+      "menuText": "",
+      "linkTo": [0]
+    }
+    ,
+    {
+      "index": 5,
+      "speaker": "守塔人",
+      "content": "噢~你也觉得很美对吧，书里都有写呢",
+      "menuText": "",
+      "linkTo": [7]
+    }
+    ,
+    {
+      "index": 6,
+      "speaker": "守塔人",
+      "content": "哈哈，真的太美了",
+      "menuText": "",
+      "linkTo": [7]
+    }
+    ,
+    {
+      "index": 7,
+      "speaker": "守塔人",
+      "content": "书里说，在三颗大石围绕的岛上，有这世界上最美的东西",
+      "menuText": "",
+      "linkTo": []
+    }
+    ,
+    {
+      "index": 8,
+      "speaker": "守塔人",
+      "content": "你能帮我去看看吗？",
+      "menuText": "",
+      "linkTo": [9,10,11]
+    }
+    ,
+    {
+      "index": 9,
+      "speaker": "我",
+      "content": "不要",
+      "menuText": "",
+      "linkTo": [4]
+    }
+    ,
+    {
+      "index": 10,
+      "speaker": "我",
+      "content": "好",
+      "menuText": "",
+      "linkTo": [-1]
+    }
+    ,
+    {
+      "index": 11,
+      "speaker": "我",
+      "content": "交给我吧",
+      "menuText": "",
+      "linkTo": [-1]
+    }
+  ]
+}

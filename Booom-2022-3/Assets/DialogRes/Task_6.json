@@ -1,0 +1,63 @@
+﻿{
+  "items": [
+    {
+      "index": 0,
+      "speaker": "男人",
+      "content": "嘿布漏，这里有一份充满才华的信",
+      "menuText": "",
+      "linkTo": []
+    },
+    {
+      "index": 1,
+      "speaker": "男人",
+      "content": "你能替我送到南边的沙滩，献给那位美丽的女士吗？",
+      "menuText": "",
+      "linkTo": [2,3,4]
+    },
+    {
+      "index": 2,
+      "speaker": "我",
+      "content": "好恶心",
+      "menuText": "",
+      "linkTo": [5]
+    },
+    {
+      "index": 3,
+      "speaker": "我",
+      "content": "好",
+      "menuText": "",
+      "linkTo": [6]
+    },
+    {
+      "index": 4,
+      "speaker": "我",
+      "content": "乐意至极",
+      "menuText": "",
+      "linkTo": [7]
+    }
+    ,
+    {
+      "index": 5,
+      "speaker": "守塔人",
+      "content": "你说什么！你懂什么！",
+      "menuText": "",
+      "linkTo": [1]
+    }
+    ,
+    {
+      "index": 6,
+      "speaker": "守塔人",
+      "content": "谢谢你",
+      "menuText": "",
+      "linkTo": [-1]
+    }
+    ,
+    {
+      "index": 7,
+      "speaker": "守塔人",
+      "content": "感谢你陌生人，愿你也能遇到美丽",
+      "menuText": "",
+      "linkTo": [-1]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+﻿{
+  "items": [
+    {
+      "index": 0,
+      "speaker": "旅行者",
+      "content": "你好呀，请问能带我去西北那边的小岛吗？",
+      "menuText": "",
+      "linkTo": []
+    },
+    {
+      "index": 1,
+      "speaker": "我",
+      "content": "你要去哪里做什么？",
+      "menuText": "",
+      "linkTo": [2,3]
+    },
+    {
+      "index": 2,
+      "speaker": "我",
+      "content": "好的",
+      "menuText": "",
+      "linkTo": [-1]
+    },
+    {
+      "index": 3,
+      "speaker": "旅行者",
+      "content": "听说那边的椰子很甜，我想去尝尝，我超喜欢甜食呢",
+      "menuText": "",
+      "linkTo": []
+    }
+    ,
+    {
+      "index": 4,
+      "speaker": "旅行者",
+      "content": "不过听说那边的很容易撞到礁石，你得小心",
+      "menuText": "",
+      "linkTo": [1]
+    }
+  ]
+}

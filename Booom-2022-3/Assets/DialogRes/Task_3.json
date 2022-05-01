@@ -1,0 +1,63 @@
+﻿{
+  "items": [
+    {
+      "index": 0,
+      "speaker": "遇难者",
+      "content": "船不小心撞到礁石沉了，你能载我回去大舅家吗",
+      "menuText": "",
+      "linkTo": []
+    },
+    {
+      "index": 1,
+      "speaker": "遇难者",
+      "content": "我要去投靠他，他会好好照顾我的",
+      "menuText": "",
+      "linkTo": [2,3,4]
+    },
+    {
+      "index": 2,
+      "speaker": "我",
+      "content": "你在这里多久了",
+      "menuText": "",
+      "linkTo": [5]
+    },
+    {
+      "index": 3,
+      "speaker": "我",
+      "content": "你大舅家在哪？",
+      "menuText": "",
+      "linkTo": [6]
+    },
+    {
+      "index": 4,
+      "speaker": "我",
+      "content": "上船吧！",
+      "menuText": "",
+      "linkTo": [7]
+    }
+    ,
+    {
+      "index": 5,
+      "speaker": "旅行者",
+      "content": "在这里被泡了三天三夜，我快虚脱了",
+      "menuText": "",
+      "linkTo": [1]
+    }
+    ,
+    {
+      "index": 6,
+      "speaker": "旅行者",
+      "content": "他住在西南方向的沙滩上，是个随时会被淹没的地方，但我也没得选择",
+      "menuText": "",
+      "linkTo": [1]
+    }
+    ,
+    {
+      "index": 7,
+      "speaker": "旅行者",
+      "content": "非常感谢",
+      "menuText": "",
+      "linkTo": [-1]
+    }
+  ]
+}

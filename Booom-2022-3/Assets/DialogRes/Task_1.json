@@ -3,14 +3,14 @@
     {
       "index": 0,
       "speaker": "旅行者",
-      "content": "嗨伙计，你是第一天上班吗，船似乎开得不太利索",
+      "content": "嗨伙计，第一天上班吗，船似乎开得不太利索呀",
       "menuText": "",
       "linkTo": []
     },
     {
       "index": 1,
       "speaker": "旅行者",
-      "content": "无所谓了，你捎我一程到隔壁的小岛上去",
+      "content": "无所谓，你捎我一程到隔壁的小岛",
       "menuText": "",
       "linkTo": []
     },
@@ -45,7 +45,7 @@
     {
       "index": 6,
       "speaker": "旅行者",
-      "content": "东北方向",
+      "content": "就在东北方向，很近",
       "menuText": "",
       "linkTo": [ 2 ]
     }

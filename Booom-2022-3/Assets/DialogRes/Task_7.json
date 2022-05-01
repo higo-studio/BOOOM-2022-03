@@ -1,0 +1,25 @@
+﻿{
+  "items": [
+    {
+      "index": 0,
+      "speaker": "女人",
+      "content": "噢，是，是他的信~",
+      "menuText": "",
+      "linkTo": []
+    },
+    {
+      "index": 1,
+      "speaker": "女人",
+      "content": "一定是那位大人的信！",
+      "menuText": "",
+      "linkTo": []
+    },
+    {
+      "index": 2,
+      "speaker": "女人",
+      "content": "这里是我的回信，麻烦你尽快送到(噢他真是太棒了)",
+      "menuText": "",
+      "linkTo": [-1]
+    }
+  ]
+}

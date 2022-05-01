@@ -1,0 +1,63 @@
+﻿{
+  "items": [
+    {
+      "index": 0,
+      "speaker": "岛主",
+      "content": "噢你好呀",
+      "menuText": "",
+      "linkTo": []
+    },
+    {
+      "index": 1,
+      "speaker": "岛主",
+      "content": "我这里有封信，你能帮我送给那个住在山对面的女儿吗？",
+      "menuText": "",
+      "linkTo": [2,3,4]
+    },
+    {
+      "index": 2,
+      "speaker": "我",
+      "content": "信的内容？",
+      "menuText": "",
+      "linkTo": [5]
+    },
+    {
+      "index": 3,
+      "speaker": "我",
+      "content": "为什么不自己送",
+      "menuText": "",
+      "linkTo": [6]
+    },
+    {
+      "index": 4,
+      "speaker": "我",
+      "content": "没问题",
+      "menuText": "",
+      "linkTo": [7]
+    }
+    ,
+    {
+      "index": 5,
+      "speaker": "岛主",
+      "content": "这是我们家人之间的事",
+      "menuText": "",
+      "linkTo": [1]
+    }
+    ,
+    {
+      "index": 6,
+      "speaker": "岛主",
+      "content": "她不想见我，我只能委托你们这些人去送",
+      "menuText": "",
+      "linkTo": [1]
+    }
+    ,
+    {
+      "index": 7,
+      "speaker": "岛主",
+      "content": "别弄丢了",
+      "menuText": "",
+      "linkTo": [-1]
+    }
+  ]
+}
