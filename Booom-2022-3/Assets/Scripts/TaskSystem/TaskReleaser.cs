@@ -39,27 +39,56 @@ public class TaskReleaser : MonoBehaviour, ITaskUITimer, ITalkable
     }
 
     bool talking = false;
+    public bool Talking => talking;
     private void FixedUpdate()
     {
         if (!isShipStay)
             return;
-        time += Time.fixedDeltaTime;
-        if (time >= holdingTime)
+
+        if (!taskManagerMono.GetTaskManager().IsTaskWorking(taskName))
         {
-            done = true;
-            if (Input.GetButtonDown("Accept") && !taskManagerMono.GetTaskManager().IsTaskWorking(taskName))
+            if (Input.GetButton("Accept"))
             {
-                if(talked)
+                time += Time.fixedDeltaTime;
+            }
+            else
+            {
+                time -= Time.fixedDeltaTime;
+                if (time < 0)
+                {
+                    time = 0;
+                }
+            }
+            if (time >= holdingTime)
+            {
+                if (talked)
                 {
                     taskManagerMono.ReleaseTask(taskName);
                 }
-                else if(!talking)
+                else if (!talking)
                 {
                     OnTalkStart();
+                    
                 }
-                
             }
         }
+        //time += Time.fixedDeltaTime;
+        //if (time >= holdingTime)
+        //{
+        //done = true;
+        //if (Input.GetButtonDown("Accept") && !taskManagerMono.GetTaskManager().IsTaskWorking(taskName))
+        //{
+        //    if(talked)
+        //    {
+        //        taskManagerMono.ReleaseTask(taskName);
+        //    }
+        //    else if(!talking)
+        //    {
+        //        OnTalkStart();
+        //    }
+
+        //}
+        //}
 
     }
 

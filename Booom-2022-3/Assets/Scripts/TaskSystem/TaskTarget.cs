@@ -25,6 +25,7 @@ public class TaskTarget : MonoBehaviour, ITaskUITimer, ITalkable
     private bool talked = false;
 
     bool talking = false;
+    public bool Talking => talking;
 
     [SerializeField]
     private bool isShipStay = false;

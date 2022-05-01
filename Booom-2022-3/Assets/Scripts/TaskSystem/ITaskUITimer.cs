@@ -6,4 +6,6 @@ public interface ITaskUITimer
     public float GetCurrTime();
 
     public bool IsDone();
+
+    public bool Talking { get; }
 }
