@@ -47,9 +47,12 @@ public class Dialogue : MonoBehaviour
     }
     void Start()
     {
-        items = JsonUtility.FromJson<JsonArrayWrap<DialogueItem>>(Json.text).items;
-        //Refresh(0);
         DisabledUI();
+    }
+
+    void SetJson(TextAsset jsonAseet)
+    {
+        items = JsonUtility.FromJson<JsonArrayWrap<DialogueItem>>(jsonAseet.text).items;
     }
 
     // Update is called once per frame
@@ -124,11 +127,12 @@ public class Dialogue : MonoBehaviour
         Refresh(nextIndex);
     }
 
-    public void Speak(ITalkable speakH, int index)
+    public void Speak(ITalkable speakH, TextAsset jsonAsset)
     {
+        SetJson(jsonAsset);
         EnableUI();
         speakerHandle = speakH;
-        Refresh(index);
+        Refresh(0);
     }
 
     public void EnableUI()

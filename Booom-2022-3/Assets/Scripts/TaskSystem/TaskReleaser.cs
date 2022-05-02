@@ -28,7 +28,7 @@ public class TaskReleaser : MonoBehaviour, ITaskUITimer, ITalkable
     private bool done = false;
 
     [Header("对话的JSON")]
-    public int wordsIndex = -1;
+    public TextAsset DialogJson;
 
     private bool talked = false;
 
@@ -130,7 +130,7 @@ public class TaskReleaser : MonoBehaviour, ITaskUITimer, ITalkable
     public void OnTalkStart()
     {
         talking = true;
-        taskManagerMono.dialogue.Speak(this, wordsIndex);
+        taskManagerMono.dialogue.Speak(this, DialogJson);
     }
 
     public void OnTalkEnd(bool normalEnding)

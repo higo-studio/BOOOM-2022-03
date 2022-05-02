@@ -20,7 +20,7 @@ public class TaskTarget : MonoBehaviour, ITaskUITimer, ITalkable
     public float holdingTime = 2.0f;
 
     [Header("对话的JSON")]
-    public int wordsIndex = -1;
+    public TextAsset DialogJson;
 
     private bool talked = false;
 
@@ -125,7 +125,14 @@ public class TaskTarget : MonoBehaviour, ITaskUITimer, ITalkable
     public void OnTalkStart()
     {
         talking = true;
-        taskManagerMono.dialogue.Speak(this, wordsIndex);
+        if (DialogJson != null)
+        {
+            taskManagerMono.dialogue.Speak(this, DialogJson);
+        }
+        else
+        {
+            OnTalkEnd(true);
+        }
     }
 
     public void OnTalkEnd(bool normalEnding)
