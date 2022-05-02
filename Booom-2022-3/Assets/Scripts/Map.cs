@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Map : MonoBehaviour
 {
@@ -28,7 +29,9 @@ public class Map : MonoBehaviour
 
     public Sprite questionPic, exclamatoryPic, crossPic;
 
-    public List<Target> targets;
+    [SerializeField]
+    private List<Target> targets = new List<Target>();
+    public Transform PointParent;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +42,28 @@ public class Map : MonoBehaviour
         mapUIW = transform.GetComponent<RectTransform>().rect.width;
         mapUIH = transform.GetComponent<RectTransform>().rect.height;
 
+        // init targets
+        var questions = PointParent
+            .GetComponentsInChildren<TaskReleaser>(true)
+            .Select(c => new Target()
+            {
+                targetObj = c.gameObject,
+                targetText = c.transform.parent.name,
+                targetType = targetType.Q
+            });
+        targets.AddRange(questions);
+
+        var distinctions = PointParent
+            .GetComponentsInChildren<TaskTarget>(true)
+            .Select(c => new Target()
+            {
+                targetObj = c.gameObject,
+                targetText = c.transform.parent.name,
+                targetType = targetType.E
+            });
+        targets.AddRange(distinctions);
         DisplayTargetOnMap();
+        UpdateVisible();
     }
 
     // Update is called once per frame
@@ -47,18 +71,20 @@ public class Map : MonoBehaviour
     {
         playerMapPos = new Vector2(Player.transform.position.x - SW.transform.position.x, Player.transform.position.z - SW.transform.position.z) / mapRange;
         playerSign.GetComponent<RectTransform>().localPosition = playerMapPos * new Vector2(mapUIW, mapUIH);
+
+        UpdateVisible();
     }
 
     void DisplayTargetOnMap()
     {
-        int i = 0;
 
         targetMapPos = new Vector2[targets.Count];
         targetSign = new GameObject[targets.Count];
 
-        
-        foreach (Target target in targets)
+
+        for (var i = 0; i < targets.Count; i++)
         {
+            var target = targets[i];
             targetSign[i] = Instantiate(targetSignPrefab, transform);
             switch (target.targetType)
             {
@@ -77,10 +103,21 @@ public class Map : MonoBehaviour
                 default:
                     break;
             }
-            targetMapPos[i] = new Vector2(target.targetObj.transform.position.x - SW.transform.position.x, target.targetObj.transform.position.z - SW.transform.position.z) / mapRange - Vector2.one * 0.5f;
+            targetMapPos[i] = new Vector2(
+                target.targetObj.transform.position.x - SW.transform.position.x,
+                target.targetObj.transform.position.z - SW.transform.position.z) / mapRange - Vector2.one * 0.5f;
             targetSign[i].GetComponent<RectTransform>().localPosition = targetMapPos[i] * new Vector2(mapUIW, mapUIH);
             targetSign[i].transform.GetChild(0).GetComponent<Text>().text = target.targetText;
-            i++;
+        }
+    }
+
+    void UpdateVisible()
+    {
+        for(var i = 0; i < targets.Count; i++)
+        {
+            var t = targets[i];
+            var sign = targetSign[i];
+            sign.SetActive(t.targetObj.transform.position.y < 400);
         }
     }
 }

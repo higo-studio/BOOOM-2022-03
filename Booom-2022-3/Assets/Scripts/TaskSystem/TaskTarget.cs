@@ -93,6 +93,8 @@ public class TaskTarget : MonoBehaviour, ITaskUITimer, ITalkable
     private Vector3 perPosition;
     private void FixedUpdate()
     {
+        UpdateVisible();
+
         if (!isShipStay)
         {
             return;
@@ -107,31 +109,6 @@ public class TaskTarget : MonoBehaviour, ITaskUITimer, ITalkable
             stayTime = 0;
             done = true;
             OnTalkStart();
-        }
-
-        bool _active = false;
-        foreach (var taskName in taskNames)
-        {
-            TaskState state = taskManagerMono.GetTaskManager().GetTaskState(taskName);
-            if (state == TaskState.ACCEPT)
-            {
-                _active = true;
-            }
-            else
-            {
-                _active |= false;
-            }
-        }
-        if (_active)
-        {
-            //显示
-            transform.position = perPosition;
-        }
-        else
-        {
-            //隐藏
-            perPosition = transform.position;
-            transform.position = new Vector3(perPosition.x, 500, perPosition.z);
         }
     }
 
@@ -155,6 +132,35 @@ public class TaskTarget : MonoBehaviour, ITaskUITimer, ITalkable
     {
         talked = normalEnding;
         talking = false;
+    }
+
+    public void UpdateVisible()
+    {
+        bool _active = false;
+        foreach (var taskName in taskNames)
+        {
+            TaskState state = taskManagerMono.GetTaskManager().GetTaskState(taskName);
+            if (state == TaskState.ACCEPT)
+            {
+                _active = true;
+                break;
+            }
+            else
+            {
+                _active |= false;
+            }
+        }
+        if (_active)
+        {
+            //显示
+            transform.position = perPosition;
+        }
+        else
+        {
+            //隐藏
+            //perPosition = transform.position;
+            transform.position = new Vector3(perPosition.x, 500, perPosition.z);
+        }
     }
 
 }
