@@ -107,7 +107,7 @@ public class Map : MonoBehaviour
                 target.targetObj.transform.position.x - SW.transform.position.x,
                 target.targetObj.transform.position.z - SW.transform.position.z) / mapRange - Vector2.one * 0.5f;
             targetSign[i].GetComponent<RectTransform>().localPosition = targetMapPos[i] * new Vector2(mapUIW, mapUIH);
-            targetSign[i].transform.GetChild(0).GetComponent<Text>().text = target.targetText;
+            targetSign[i].transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = target.targetText;
         }
     }
 
